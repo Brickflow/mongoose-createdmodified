@@ -47,7 +47,7 @@ createdModifiedPlugin = (schema, options={}) ->
       type: Date
       default: () -> null
   schema.pre "save", (next) ->
-	if modifiedName?
+    if modifiedName?
       @[modifiedName] = new Date()
     if createdName? and @.get(createdName) in [undefined, null]
       @[createdName] = new Date()
