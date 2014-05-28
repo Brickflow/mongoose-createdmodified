@@ -53,8 +53,8 @@ createdModifiedPlugin = (schema, options={}) ->
       @[createdName] = new Date()
     next()
 
-  schema.path(createdName).index options.index  if options.index
-  schema.path(modifiedName).index options.index  if options.index
+  schema.path(createdName).index options.index if options.index and createdName?
+  schema.path(modifiedName).index options.index if options.index and modifiedName?
 
 # -- exports ----------------------------------------------------------
 
