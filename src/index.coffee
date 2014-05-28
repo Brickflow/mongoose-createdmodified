@@ -33,8 +33,8 @@ addSchemaField = (schema, pathname, fieldSpec) ->
 
 createdModifiedPlugin = (schema, options={}) ->
   defaults options,
-    createdName: 'createdAt'
-    modifiedName: 'modifiedAt'
+    createdName: null
+    modifiedName: null
     index: false
   createdName = options.createdName
   modifiedName = options.modifiedName
