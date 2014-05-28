@@ -33,20 +33,23 @@ addSchemaField = (schema, pathname, fieldSpec) ->
 
 createdModifiedPlugin = (schema, options={}) ->
   defaults options,
-    createdName: 'created'
-    modifiedName: 'modified'
+    createdName: 'createdAt'
+    modifiedName: 'modifiedAt'
     index: false
   createdName = options.createdName
   modifiedName = options.modifiedName
-  addSchemaField schema, createdName,
-    type: Date
-    default: () -> null
-  addSchemaField schema, modifiedName,
-    type: Date
-    default: () -> null
+  if createdName?
+    addSchemaField schema, createdName,
+      type: Date
+      default: () -> null
+  if modifiedName?
+    addSchemaField schema, modifiedName,
+      type: Date
+      default: () -> null
   schema.pre "save", (next) ->
-    @[modifiedName] = new Date()
-    if @.get(createdName) in [undefined, null]
+	if modifiedName?
+      @[modifiedName] = new Date()
+    if createdName? and @.get(createdName) in [undefined, null]
       @[createdName] = new Date()
     next()
 
